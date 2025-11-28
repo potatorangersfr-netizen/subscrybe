@@ -1,4 +1,4 @@
-﻿/* shared/types.ts */
+﻿/* shared/types.ts - SINGLE SOURCE OF TRUTH */
 
 export interface User {
   id: string;
@@ -49,16 +49,36 @@ export interface Payment {
   status: 'success' | 'failed' | 'pending';
   txHash?: string;
   executedAt: string;
+
+  // Hydra simulation extensions
+  isHydraSimulation?: boolean;
+  processingTime?: number; // milliseconds
 }
 
 export interface WalletConnection {
   address: string;
-  network: string;
+  network: 'mainnet' | 'preprod' | 'preview';
   balance: number;
+}
+
+export interface HydraPaymentOptions {
+  enabled: boolean;
+  estimatedTime: number; // milliseconds
+  estimatedFee: number; // ADA
+  description: string;
 }
 
 export interface ApiResponse<T> {
   success: boolean;
   data?: T;
   error?: string;
+  message?: string;
+}
+
+export interface SpendingAnalytics {
+  totalMonthly: number;
+  totalYearly: number;
+  byCategory: Record<string, number>;
+  byMerchant: Record<string, number>;
+  avgPerSubscription: number;
 }
