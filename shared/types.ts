@@ -1,5 +1,4 @@
-﻿/* shared/types.ts - SINGLE SOURCE OF TRUTH */
-
+﻿// User types
 export interface User {
   id: string;
   walletAddress: string;
@@ -8,6 +7,7 @@ export interface User {
   budgetLimit?: number;
 }
 
+// Merchant types
 export interface Merchant {
   id: string;
   walletAddress: string;
@@ -16,6 +16,7 @@ export interface Merchant {
   verified: boolean;
 }
 
+// Subscription Plan types
 export interface SubscriptionPlan {
   id: string;
   merchantId: string;
@@ -26,6 +27,7 @@ export interface SubscriptionPlan {
   interval: 'monthly' | 'yearly';
 }
 
+// Subscription types
 export interface Subscription {
   id: string;
   userId: string;
@@ -41,6 +43,7 @@ export interface Subscription {
   createdAt: string;
 }
 
+// Payment types
 export interface Payment {
   id: string;
   subscriptionId: string;
@@ -49,36 +52,44 @@ export interface Payment {
   status: 'success' | 'failed' | 'pending';
   txHash?: string;
   executedAt: string;
-
-  // Hydra simulation extensions
   isHydraSimulation?: boolean;
-  processingTime?: number; // milliseconds
+  processingTime?: number;
 }
 
-export interface WalletConnection {
-  address: string;
-  network: 'mainnet' | 'preprod' | 'preview';
-  balance: number;
-}
-
+// Hydra types
 export interface HydraPaymentOptions {
   enabled: boolean;
-  estimatedTime: number; // milliseconds
-  estimatedFee: number; // ADA
+  estimatedTime: number;
+  estimatedFee: number;
   description: string;
 }
 
+// Wallet Connection types
+export interface WalletConnection {
+  address: string;
+  network: string;
+  balance: number;
+}
+
+// API Response types
 export interface ApiResponse<T> {
   success: boolean;
   data?: T;
   error?: string;
-  message?: string;
 }
 
+// Analytics types
 export interface SpendingAnalytics {
   totalMonthly: number;
   totalYearly: number;
   byCategory: Record<string, number>;
   byMerchant: Record<string, number>;
-  avgPerSubscription: number;
+  averagePerSubscription: number;
+}
+
+// Privacy types
+export interface UserData {
+  user: User;
+  subscriptions: Subscription[];
+  payments: Payment[];
 }
