@@ -1,0 +1,9 @@
+﻿services:
+  - type: web
+    name: subscrybe-backend
+    env: node
+    region: singapore
+    branch: main
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm start"
+    instanceType: free
